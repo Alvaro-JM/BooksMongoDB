@@ -16,7 +16,7 @@ La coma `,`
 - Siguiendo la notación JSON, ¿cuál es el caracter que separa el identificador del campo de su valor?  
 Los dos puntos `:`
 
-- ¿Cuál es la diferencia entre una base de datos relacional y una base de datos no relacional?
+- ¿Cuál es la diferencia entre una base de datos relacional y una base de datos no relacional?  
 Una base de datos **relacional** está **estructurada**, y las tablas están
 relacionadas mediante claves primarias, y en las que los datos siguen una
 estructura fija.
