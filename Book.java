@@ -1,5 +1,3 @@
-package pacal.alvaro_libros;
-
 import com.github.javafaker.Faker;
 import java.util.Random;
 
