@@ -57,7 +57,6 @@ COLLECTION que solo aparece si tienes una base de datos seleccionada.
   En el botón verde ADD DATA, opción Insert Document. En la pantalla que
 aparece se añade el nuevo objeto escribiendo sus atributos.
 ![](/pics/3.png)
-![](/pics/4.png)
 ---
   
 #### 4
