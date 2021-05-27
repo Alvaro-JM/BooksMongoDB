@@ -9,6 +9,7 @@ Collections (colecciones)
 Es un gestor de base de datos orientado a documentos  
 
 - ¿Cuál es la extensión de los ficheros/objetos que almacena MongoDB?
+
 .bson, que es una especificación similar a .json  
   
 - Siguiendo la notación JSON, ¿cuál es el caracter delimitador de campo? 
