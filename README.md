@@ -46,15 +46,18 @@ https://www.mongodb.com/try/download/community
 - ¿Qué botón es necesario pulsar en la interfaz para crear una nueva base de datos?  
 El botón + de abajo a la izquierda, o en el botón verde CREATE DATABASE
 que solo aparece si no tienes nada seleccionado.  
+![](/pics/1.png)
 
 - ¿Y una colección?  
 El botón + que está en la base de datos, o en el botón verde CREATE
 COLLECTION que solo aparece si tienes una base de datos seleccionada.  
+![](/pics/2.png)
 
 - ¿Cómo se añade un nuevo objeto a la colección usando la interfaz gráfica de MongoDB?  
   En el botón verde ADD DATA, opción Insert Document. En la pantalla que
 aparece se añade el nuevo objeto escribiendo sus atributos.
-
+![](/pics/3.png)
+![](/pics/4.png)
 ---
   
 #### 4
