@@ -1,4 +1,3 @@
-package pacal.alvaro_libros;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
