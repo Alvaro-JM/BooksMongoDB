@@ -8,16 +8,16 @@ Collections (colecciones)
 Es un gestor de base de datos orientado a documentos  
 
 - ¿Cuál es la extensión de los ficheros/objetos que almacena MongoDB?
-- .bson, que es una especificación similar a .json  
+.bson, que es una especificación similar a .json  
   
-- Siguiendo la notación JSON, ¿cuál es el caracter delimitador de campo? 
+- Siguiendo la notación JSON, ¿cuál es el caracter delimitador de campo?
 La coma `,` 
  
 - Siguiendo la notación JSON, ¿cuál es el caracter que separa el identificador del campo de su valor?  
 Los dos puntos `:`
 
-- ¿Cuál es la diferencia entre una base de datos relacional y una base de datos no relacional?  
-  Una base de datos **relacional** está **estructurada**, y las tablas están
+- ¿Cuál es la diferencia entre una base de datos relacional y una base de datos no relacional?
+Una base de datos **relacional** está **estructurada**, y las tablas están
 relacionadas mediante claves primarias, y en las que los datos siguen una
 estructura fija.
 En la base de datos **no relacional** no están estructuradas de esa forma,
