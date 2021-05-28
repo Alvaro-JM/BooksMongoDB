@@ -34,7 +34,7 @@ public class ReadBooks {
     }
     
     /**
-     * Find books whose author name has initial the character given as parameter.
+     * Find titles whose author name has initial the character given as parameter.
      * This method use a pattern.
      * @param booksCollection target collection
      * @param c initial
