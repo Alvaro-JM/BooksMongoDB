@@ -35,10 +35,11 @@ public class ReadBooks {
     
     /**
      * Find books whose author name has initial the character given as parameter.
+     * This method use a pattern.
      * @param booksCollection target collection
      * @param c initial
      */
-    private static void findByNameInitial(MongoCollection<Document> booksCollection, char c) {
+    private static void findByNameInitialPattern(MongoCollection<Document> booksCollection, char c) {
         Pattern pattern = Pattern.compile("^" + c + ".*$", Pattern.CASE_INSENSITIVE);
         
         FindIterable<Document> iterable = booksCollection.find(eq("author", pattern));
@@ -46,6 +47,21 @@ public class ReadBooks {
         
         while (cursor.hasNext()) {
             System.out.println(cursor.next().toJson());
+        }
+    }
+    
+    /**
+     * Find books whose author name has initial the character given as parameter.
+     * This method use a pattern.
+     * @param booksCollection target collection
+     * @param c initial
+     */
+    private static void findByNameInitial(MongoCollection<Document> booksCollection, char c) {
+        List<Document> booksList = booksCollection.find(and(gte("author", c), lte("author", (char)(c+1))))
+                .into(new ArrayList<>());
+        
+        for (Document d : booksList) {
+            System.out.println(d.toJson());
         }
     }
     
@@ -75,6 +91,9 @@ public class ReadBooks {
             
             System.out.println("\nFind all books whose author name has initial P:");
             findByNameInitial(booksCollection, 'P');
+            
+            System.out.println("\nFind all books whose author name has initial P (with PATTERN):");
+            findByNameInitialPattern(booksCollection, 'P');
             
             System.out.println("\nFind the first book published in 2021:");
             findFirstOfYear(booksCollection, 2021);
