@@ -24,8 +24,10 @@ public class ReadBooks {
      * @param booksCollection target collection
      * @param year publication year
      */
-    private static void findByYear(MongoCollection<Document> booksCollection, int year){
-        List<Document> booksList = booksCollection.find(gte("year", year)).into(new ArrayList<>());
+    private static void findTitleByYear(MongoCollection<Document> booksCollection, int year){
+        List<Document> booksList = booksCollection.find(gte("year", year))
+                .projection(fields(excludeId(), include("title", "year")))
+                .into(new ArrayList<>());
         for (Document d : booksList) {
             System.out.println(d.toJson());
         }
