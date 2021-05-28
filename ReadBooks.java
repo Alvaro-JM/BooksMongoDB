@@ -20,7 +20,7 @@ import org.bson.Document;
 public class ReadBooks {
 
     /**
-     * Find books with publication year greater than year given as parameter.
+     * Find titles with publication year greater than year given as parameter.
      * @param booksCollection target collection
      * @param year publication year
      */
@@ -42,7 +42,8 @@ public class ReadBooks {
     private static void findByNameInitialPattern(MongoCollection<Document> booksCollection, char c) {
         Pattern pattern = Pattern.compile("^" + c + ".*$", Pattern.CASE_INSENSITIVE);
         
-        FindIterable<Document> iterable = booksCollection.find(eq("author", pattern));
+        FindIterable<Document> iterable = booksCollection.find(eq("author", pattern))
+                .projection(fields(excludeId(), include("title", "author")));
         MongoCursor<Document> cursor = iterable.iterator();
         
         while (cursor.hasNext()) {
@@ -51,13 +52,14 @@ public class ReadBooks {
     }
     
     /**
-     * Find books whose author name has initial the character given as parameter.
+     * Find titles whose author name has initial the character given as parameter.
      * This method use a pattern.
      * @param booksCollection target collection
      * @param c initial
      */
     private static void findByNameInitial(MongoCollection<Document> booksCollection, char c) {
         List<Document> booksList = booksCollection.find(and(gte("author", c), lte("author", (char)(c+1))))
+                .projection(fields(excludeId(), include("title", "author")))
                 .into(new ArrayList<>());
         
         for (Document d : booksList) {
@@ -87,7 +89,7 @@ public class ReadBooks {
             MongoCollection<Document> booksCollection = libraryDB.getCollection("books");
 
             System.out.println("\nFind all books with a publication year after 2000:");
-            findByYear(booksCollection, 2000);
+            findTitleByYear(booksCollection, 2000);
             
             System.out.println("\nFind all books whose author name has initial P:");
             findByNameInitial(booksCollection, 'P');
