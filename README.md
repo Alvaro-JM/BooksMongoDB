@@ -188,30 +188,50 @@ Consulta el primer libro publicado en 2021.
 public class ReadBooks {
 
     /**
-     * Find books with publication year greater than year given as parameter.
+     * Find titles with publication year greater than year given as parameter.
      * @param booksCollection target collection
      * @param year publication year
      */
-    private static void findByYear(MongoCollection<Document> booksCollection, int year){
-        List<Document> booksList = booksCollection.find(gte("year", year)).into(new ArrayList<>());
+    private static void findTitleByYear(MongoCollection<Document> booksCollection, int year){
+        List<Document> booksList = booksCollection.find(gte("year", year))
+                .projection(fields(excludeId(), include("title", "year")))
+                .into(new ArrayList<>());
         for (Document d : booksList) {
             System.out.println(d.toJson());
         }
     }
     
     /**
-     * Find books whose author name has initial the character given as parameter.
+     * Find titles whose author name has initial the character given as parameter.
+     * This method use a pattern.
      * @param booksCollection target collection
      * @param c initial
      */
-    private static void findByNameInitial(MongoCollection<Document> booksCollection, char c) {
+    private static void findByNameInitialPattern(MongoCollection<Document> booksCollection, char c) {
         Pattern pattern = Pattern.compile("^" + c + ".*$", Pattern.CASE_INSENSITIVE);
         
-        FindIterable<Document> iterable = booksCollection.find(eq("author", pattern));
+        FindIterable<Document> iterable = booksCollection.find(eq("author", pattern))
+                .projection(fields(excludeId(), include("title", "author")));
         MongoCursor<Document> cursor = iterable.iterator();
         
         while (cursor.hasNext()) {
             System.out.println(cursor.next().toJson());
+        }
+    }
+    
+    /**
+     * Find titles whose author name has initial the character given as parameter.
+     * This method use a pattern.
+     * @param booksCollection target collection
+     * @param c initial
+     */
+    private static void findByNameInitial(MongoCollection<Document> booksCollection, char c) {
+        List<Document> booksList = booksCollection.find(and(gte("author", c), lte("author", (char)(c+1))))
+                .projection(fields(excludeId(), include("title", "author")))
+                .into(new ArrayList<>());
+        
+        for (Document d : booksList) {
+            System.out.println(d.toJson());
         }
     }
     
@@ -237,15 +257,21 @@ public class ReadBooks {
             MongoCollection<Document> booksCollection = libraryDB.getCollection("books");
 
             System.out.println("\nFind all books with a publication year after 2000:");
-            findByYear(booksCollection, 2000);
+            findTitleByYear(booksCollection, 2000);
             
             System.out.println("\nFind all books whose author name has initial P:");
             findByNameInitial(booksCollection, 'P');
             
+            System.out.println("\nFind all books whose author name has initial P (with PATTERN):");
+            findByNameInitialPattern(booksCollection, 'P');
+            
             System.out.println("\nFind the first book published in 2021:");
             findFirstOfYear(booksCollection, 2021);
+        
         }    
     }
+    
 }
+
 
 ~~~
